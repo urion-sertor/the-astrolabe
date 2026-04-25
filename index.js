@@ -35,11 +35,9 @@ const commands = [
     new SlashCommandBuilder()
         .setName('lock')
         .setDescription('Locks the current diplomacy thread (Read-only for users)')
-        .setDefaultMemberPermissions(PermissionFlagsBits.ManageThreads),
     new SlashCommandBuilder()
         .setName('unlock')
         .setDescription('Unlocks the current diplomacy thread')
-        .setDefaultMemberPermissions(PermissionFlagsBits.ManageThreads)
 ].map(command => command.toJSON());
 
 client.once('ready', async () => {
