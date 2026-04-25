@@ -17,9 +17,9 @@ const TOKEN = process.env.TOKEN;
 const PORT = process.env.PORT || 8080;
 
 // Discord identifiers
-const CATEGORY_ID = process.env.CATEGORY_ID
-const ROLE_SPECTATOR_ID = process.env.ROLE_SPECTATOR_ID
-const ROLE_UMPIRE_ID = process.env.ROLE_UMPIRE_ID
+const CATEGORY_ID = process.env.CATEGORY_ID;
+const ROLE_SPECTATOR_ID = process.env.ROLE_SPECTATOR_ID;
+const ROLE_UMPIRE_ID = process.env.ROLE_UMPIRE_ID;
 // ---------------------
 
 // HTTP Server for Health Checks
@@ -34,7 +34,7 @@ http.createServer((req, res) => {
 const commands = [
     new SlashCommandBuilder()
         .setName('lock')
-        .setDescription('Locks the current diplomacy thread (Read-only for users)')
+        .setDescription('Locks the current diplomacy thread (Read-only for users)'),
     new SlashCommandBuilder()
         .setName('unlock')
         .setDescription('Unlocks the current diplomacy thread')
@@ -91,7 +91,9 @@ client.on('interactionCreate', async (interaction) => {
 
         // Check for Umpire Role or Admin
         const hasUmpireRole = member.roles.cache.has(ROLE_UMPIRE_ID);
-        if (!hasUmpireRole && !member.permissions.has(PermissionFlagsBits.Administrator)) {
+        const isAdmin = member.permissions.has(PermissionFlagsBits.Administrator);
+
+        if (!hasUmpireRole && !isAdmin) {
             return interaction.reply({ content: "Only an Umpire may adjust this thread's course.", ephemeral: true });
         }
 
